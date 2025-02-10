@@ -1,17 +1,18 @@
 classdef unscentedKalmanFilter
     properties
+        % state vector =[position,velocity,quaternion,angular velocity]
         x
-
+        % state covariance matrix
         P
-
+        % process noise covariance matrix
         Q
-
+        % sensor/ measurement noise covaraince matrix
         R
-
+        % UKF paramters
         alpha
         beta
         kappa
-
+        % time step
         dt
 
     end
@@ -65,17 +66,17 @@ classdef unscentedKalmanFilter
             n = length(obj.x);
             numberSigmaPoints = size(sigmaPoints,2);
             xPred = zeros(n,1);
-    
+            % compute mean
             for i = 1:numberSigmaPoints
-                xPred = xPred + weights(i) * obj.processModel(sigmaPoints(:,i));
-                
+                xPred = xPred + weights(i) * obj.processModel(sigmaPoints(:,i));                
             end
+            % compute covariance
             covPred = zeros(n,n);
             for i = 1: numberSigmaPoints
                 dx = obj.processModel(sigmaPoints(:,i)) - xPred;
                 covPred = covPred + weights(i) * (dx *dx') ;
             end
-            covPred = covPred + + obj.Q;
+            covPred = covPred + obj.Q;
         end
         function [xUpdate,pUpdate] = correctStep(obj,sigmaPoints,weights,xPred,covPred,z)
             n = length(obj.x);
@@ -109,9 +110,21 @@ classdef unscentedKalmanFilter
 
         end
         function [xNext] = processModel(obj,x)
-        % orbit dynamics - changes based on the range / phase
+        % orbit dynamics & attitude dynamics - changes based on the range / phase
+        % from 500 km - 5 km
+        % orbital elements and pertubation equation
+        % attitude dynamics with flexible panels
 
-        % attitude dynamics - changes based on range / phase
+
+        % from 5 km to docking 2 m
+        % Clohessy Wiltshire equation
+        % attitude dynamics with flexible panels    
+
+        % from 2 m - final approach
+        % Clohessy Wiltshire equation
+        % relative attitude dynamics
+
+
         end
 
         function [zNext] = measurementModel(obj,x)
