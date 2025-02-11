@@ -125,7 +125,7 @@ classdef unscentedKalmanFilter
         % Clohessy Wiltshire equation
         % relative attitude dynamics
 
-        % model the biases as a random walk
+        % model the bias as a random
 
 
         end
