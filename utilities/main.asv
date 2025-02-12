@@ -5,7 +5,7 @@ close all;
 % initialise the parameters
 parameters;
 
-% Not needed but can do to simplify variable names
+% Not needed but can do to simplify variables
 x0 = initialState;
 P0 = stateCovariance;
 Q = processNoise;
@@ -17,4 +17,4 @@ realMeasurements = z;
 ukf = unscentedKalmanFilter(x0,P0,Q,R,dt);
 
 % create xUpdate and pUpdate
-[xUpdate,pUpdate] = ukf.updateStep(ukf,realMeasurements);
+[xUpdate,] = ukf.updateStep(ukf,realMeasurements)
