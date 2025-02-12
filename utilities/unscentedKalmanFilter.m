@@ -1,6 +1,6 @@
 classdef unscentedKalmanFilter
     properties
-        % state vector =[position,velocity,quaternion,angular velocity,acc_bias,gyro_bias,gps_bias,lidar_bias,startrac_bias]
+        % state vector =[position(3),velocity(3),quaternion(4),angularVelocity(3),acc_bias (3),gyro_bias(3),gps_bias(clock-1),lidar_bias(3),star_bias(3)]
         x
         % state covariance matrix
         P
