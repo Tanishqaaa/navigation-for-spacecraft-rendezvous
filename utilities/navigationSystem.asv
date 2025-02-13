@@ -1,0 +1,19 @@
+classdef navigationSystem
+    properties
+    spacecraft
+    ukf
+    sensor
+
+    end
+    methods
+        function obj = navigationSystem(initialState)
+            obj.spacecraft = spacecraft(initialState);
+            obj.u
+
+
+        end
+        function obj = performNavigation()
+
+        end
+    end
+end
