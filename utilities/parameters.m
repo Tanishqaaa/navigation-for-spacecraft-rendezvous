@@ -1,7 +1,6 @@
 
-stateVector = ;
-stateCovariance =;
-processNoise = 
-measurementNoise =;
-time =;
-z =;
+stateVector = [];
+stateCovariance = [];
+processNoise = [];
+measurementNoise =[];
+time = [];

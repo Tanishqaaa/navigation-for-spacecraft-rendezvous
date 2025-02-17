@@ -2,7 +2,6 @@ classdef sensorSuite
     properties
         starAttitude
         lidarDistance
-        lidarDirection
         gyroAnguarlVelocity
         accAcceleration
         gpsPosition
@@ -24,17 +23,12 @@ classdef sensorSuite
             % 3. Convert to engineering units
             % 4. Check validity
             
-            % Simulated GPS measurement
-            % gps_pos = randn(3,1) * 0.01;  % 10m position noise
-            % gps_vel = randn(3,1) * 0.001; % 1mm/s velocity noise
-            % 
-            % % Simulated attitude measurement from star tracker
-            % attitude_noise = randn(4,1) * 0.001; % 0.001 rad attitude noise
-            % 
-            % % Simulated angular velocity from IMU
-            % omega_noise = randn(3,1) * 0.0001; % 0.0001 rad/s angular velocity noise
+            gps_measurement = [gpsPosition;gpsVelocity];
+            lidar_measurement = [lidarDistance];
+            star_tracker_measurement = [starAttitude];
+            imu_measurement = [gyroAngularVelocity;accAcceleration];
             
-            measurements = [gpsPosition,gpsVelocity,lidarDistance,lidarDirection,accAcceleration,gyroAnguarlVelocity,starAttitude]; %should be same order as in sensor model
+            measurements = [gps_measurement; lidar_measurement; star_tracker_measurement; imu_measurement]; %should be same order as in sensor model
         end
     end
 end

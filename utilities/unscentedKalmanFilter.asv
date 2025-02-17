@@ -135,25 +135,20 @@ classdef unscentedKalmanFilter
     
         % --- GNSS Measurement Model ---
         % GNSS measures receiver clock bias
-        % 1 m position correction - standard
-        % 0.05 m/s doppler based velocity erros
-        gps_measurement = [position + gpsBias + randn(3,1) * 1; velocity + randn(3,1) * 0.005]; % GPS noise
+        % 
+        gps_measurement = [position + gpsPosBias + randn(3,1) * 0.0; velocity + randn(3,1) * 0.01]; % GPS noise
     
         % --- LIDAR Measurement Model ---
         % LIDAR provides range and direction, affected by misalignment
-        % 1 mrad misalignment error
-        % position error of 5 cm
         lidar_rotation_error = eye(3) + diag(randn(3,1) * 0.001); % Small misalignment matrix
-        lidar_measurement = lidar_rotation_error * (position + lidarBias + randn(3,1) * 0.05); 
+        lidar_measurement = lidar_rotation_error * (position + lidarBias + randn(3,1) * 0.02); 
     
         % --- Star Tracker Measurement Model ---
         % Star tracker measures attitude (quaternion) with bias and noise
-        star_tracker_measurement = quaternion + starBias + randn(4,1) * 0.001;
+        star_tracker_measurement = quaternion + starBias + randn(4,1) * 0.0001;
     
         % --- IMU Measurement Model ---
         % IMU gives angular velocity and acceleration with drift & noise
-        % 0.1 % scale factor in gyro
-        % 0.01 m/s2 acc bias noise
         imu_measurement = [(angularVelocity + gyroBias) * (1 + randn(1) * 0.001); % Gyro bias & scale error
                            accBias + randn(3,1) * 0.01]; % Accelerometer bias & noise
     
