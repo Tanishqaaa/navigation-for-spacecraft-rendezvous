@@ -123,34 +123,34 @@ classdef unscentedKalmanFilter
       
         function [zNext] = measurementModel(obj, x)
         % Extract state variables
-        position = x(1:3);
-        velocity = x(4:6);
-        quaternion = x(7:10);
-        angularVelocity = x(11:13);
-        accBias = x(14:16);
-        gyroBias = x(17:19);
-        gpsBias = x(20);
-        lidarBias = x(21:23);
-        starBias = x(24:26);
+        position = obj.x(1:3);
+        velocity = obj.x(4:6);
+        quaternion = obj.x(7:10);
+        angularVelocity = obj.x(11:13);
+        accBias = obj.x(14:16);
+        gyroBias = obj.x(17:19);
+        gpsBias = obj.x(20);
+        lidarBias = obj.x(21:23);
+        starBias = obj.x(24:26);
     
-        % --- GNSS Measurement Model ---
+        % GNSS Measurement Model 
         % GNSS measures receiver clock bias
         % 1 m position correction - standard
         % 0.05 m/s doppler based velocity erros
         gps_measurement = [position + gpsBias + randn(3,1) * 1; velocity + randn(3,1) * 0.005]; % GPS noise
     
-        % --- LIDAR Measurement Model ---
+        % LIDAR Measurement Model
         % LIDAR provides range and direction, affected by misalignment
         % 1 mrad misalignment error
         % position error of 5 cm
         lidar_rotation_error = eye(3) + diag(randn(3,1) * 0.001); % Small misalignment matrix
         lidar_measurement = lidar_rotation_error * (position + lidarBias + randn(3,1) * 0.05); 
     
-        % --- Star Tracker Measurement Model ---
+        % Star Tracker Measurement Model 
         % Star tracker measures attitude (quaternion) with bias and noise
         star_tracker_measurement = quaternion + starBias + randn(4,1) * 0.001;
     
-        % --- IMU Measurement Model ---
+        % IMU Measurement Model 
         % IMU gives angular velocity and acceleration with drift & noise
         % 0.1 % scale factor in gyro
         % 0.01 m/s2 acc bias noise

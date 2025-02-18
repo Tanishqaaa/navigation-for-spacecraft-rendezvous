@@ -6,9 +6,9 @@ classdef navigationSystem
 
     end
     methods
-        function obj = navigationSystem(initialState)
+        function obj = navigationSystem(initialState,stateCovariance, processNoise, measurementNoise, time)
             obj.spacecraft = spacecraft(initialState);
-            obj.ukf = unscentedKalmanFilter(); %give it parameters
+            obj.ukf = unscentedKalmanFilter(initialState,stateCovariance, processNoise, measurementNoise, time); %give it parameters
             obj.sensor = sensorSuite();
 
         end

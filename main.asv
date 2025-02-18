@@ -1,0 +1,14 @@
+clc;
+clear;
+close all;
+
+% initialise the parameters
+parameters;
+navSystem = navigationSystem(stateVector);
+
+while true:
+    [updatedState,updatedCovariance] = navSystem.performNavigation();
+    
+
+end 
+
